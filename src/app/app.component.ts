@@ -70,6 +70,30 @@ export class AppComponent {
       {name: "Short", value: "short"},
     ],
 
+    "Leg": [
+      {name: "Default", value: "default"},
+      {name: "Bubble-Tea", value: "bubble-tea"},
+      {name: "Cookie", value: "cookie"},
+      {name: "Game-Console", value: "game-console"},
+      {name: "Tilt Backward", value: "tilt-backward"},
+      {name: "Tilt Forward", value: "tilt-forward"},
+    ],
+
+    "Mouth": [
+      {name: "Default", value: "default"},
+      {name: "Astonished", value: "astonished"},
+      {name: "Eating", value: "eating"},
+      {name: "Laughing", value: "laugh"},
+      {name: "Tongue", value: "tongue"},
+    ],
+
+    "Neck": [
+      {name: "Default", value: "default"},
+      {name: "Bend Backward", value: "bend-backward"},
+      {name: "Bend Forward", value: "bend-forward"},
+      {name: "Thick", value: "thick"},
+    ]
+
   };
   
 }
