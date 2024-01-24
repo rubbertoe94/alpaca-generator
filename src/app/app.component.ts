@@ -15,16 +15,17 @@ export class AppComponent {
 
   constructor(){}
 
-  properties: {[key: string]: any} = {
+  properties: {[name: string]: any} = {
 
-    "Accessories": [
+    "accessories": [
+      {name: "Default", value: "default"},
       {name: "Earrings", value: "earings"},
       {name: "Flower", value: "flower"},
       {name: "Glasses", value: "glasses"},
       {name: "Headphones", value: "headphone"}
       ],
 
-    "Backgrounds": [
+    "backgrounds": [
       { name: 'Blue 50', value: 'blue50' },
       { name: 'Blue 60', value: 'blue60' },
       { name: 'Blue 70', value: 'blue70' },
@@ -45,13 +46,13 @@ export class AppComponent {
       { name: 'Yellow 70', value: 'yellow70' }
     ],
 
-    "Ears": [
+    "ears": [
       {name: "Default", value: "default"},
       {name: "Tilted Backward", value: "tilt-backward"},
       {name: "Tilted Forward", value: "tilt-forward"}
     ],
 
-    "Eyes": [
+    "eyes": [
       {name: "Default", value: "default"},
       {name: "Angry", value: "angry"},
       {name: "Naughty", value: "naughty"},
@@ -60,7 +61,7 @@ export class AppComponent {
       {name: "Star", value: "star"},
     ],
 
-    "Hair": [
+    "hair": [
       {name: "Bangs", value: "bangs"},
       {name: "Curls", value: "curls"},
       {name: "Default", value: "default"},
@@ -70,7 +71,7 @@ export class AppComponent {
       {name: "Short", value: "short"},
     ],
 
-    "Leg": [
+    "leg": [
       {name: "Default", value: "default"},
       {name: "Bubble-Tea", value: "bubble-tea"},
       {name: "Cookie", value: "cookie"},
@@ -79,7 +80,7 @@ export class AppComponent {
       {name: "Tilt Forward", value: "tilt-forward"},
     ],
 
-    "Mouth": [
+    "mouth": [
       {name: "Default", value: "default"},
       {name: "Astonished", value: "astonished"},
       {name: "Eating", value: "eating"},
@@ -87,7 +88,7 @@ export class AppComponent {
       {name: "Tongue", value: "tongue"},
     ],
 
-    "Neck": [
+    "neck": [
       {name: "Default", value: "default"},
       {name: "Bend Backward", value: "bend-backward"},
       {name: "Bend Forward", value: "bend-forward"},
@@ -95,5 +96,26 @@ export class AppComponent {
     ]
 
   };
+
+  currentProperty: string = "hair";
+
+
+  alpaca: any = {
+    "accessories": "default",
+    "background": "blue50",
+    "ears": "default",
+    "eyes": "default",
+    "hair": "default",
+    "leg": "default",
+    "mouth": "default",
+    "neck": "default"
+  }
   
+
+
+changeProperty(choice: string) {
+this.currentProperty = choice;
+  console.log(this.currentProperty);
+}
+
 }
