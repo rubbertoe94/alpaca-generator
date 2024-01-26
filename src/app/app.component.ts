@@ -25,7 +25,7 @@ export class AppComponent {
       {name: "Headphones", value: "headphone"}
       ],
 
-    "backgrounds": [
+    "background": [
       { name: 'Blue 50', value: 'blue50' },
       { name: 'Blue 60', value: 'blue60' },
       { name: 'Blue 70', value: 'blue70' },
@@ -62,9 +62,9 @@ export class AppComponent {
     ],
 
     "hair": [
-      {name: "Bangs", value: "bangs"},
-      {name: "Curls", value: "curls"},
       {name: "Default", value: "default"},
+      {name: "Bangs", value: "bang"},
+      {name: "Curls", value: "curls"},
       {name: "Elegant", value: "elegant"},
       {name: "Fancy", value: "fancy"},
       {name: "Quiff", value: "quiff"},
@@ -102,20 +102,95 @@ export class AppComponent {
 
   alpaca: any = {
     "accessories": "default",
-    "background": "blue50",
+    "background": "blue60",
     "ears": "default",
     "eyes": "default",
     "hair": "default",
     "leg": "default",
     "mouth": "default",
-    "neck": "default"
+    "neck": "default",
   }
   
 
 
 changeProperty(choice: string) {
 this.currentProperty = choice;
-  console.log(this.currentProperty);
+  console.log("currentProperty: ", this.currentProperty);
+}
+
+changeStyle(choice: string) {
+  this.alpaca[this.currentProperty] = choice;
+  console.log("currentStyle: ", this.alpaca[this.currentProperty])
+}
+
+downloadImage() {
+
 }
 
 }
+
+
+// .selection-section {
+//   flex: 1;
+//   padding-left: 20px; 
+// }
+
+// /* Selection control styles */
+// .radio-container {
+//   margin: 10px;
+//   text-align: center;
+// }
+
+// .radio h2 {
+//   font-size: 24px;
+//   margin-bottom: 10px;
+// }
+
+// .radio {
+//   display: flex;
+//   flex-wrap: wrap;
+//   gap: 10px;
+//   align-items: center;
+// }
+
+// input[type="radio"] {
+//   display: none;
+// }
+
+// label {
+//   display: block;
+//   cursor: pointer;
+//   font-size: 18px;
+//   font-weight: bold;
+//   border: 2px solid #c1d3ef;
+//   border-radius: 30px;
+//   color: #c1d3ef;
+//   padding: 10px 20px;
+//   text-align: center;
+//   transition: all 0.3s ease;
+// }
+
+// label:hover {
+//   border-color: #699cf5;
+//   color: #699cf5;
+// }
+
+
+// .download-section {
+//   margin-top: 20px;
+// }
+
+// button {
+//   background-color: #23509c;
+//   color: #fff;
+//   border: none;
+//   border-radius: 30px;
+//   padding: 10px 20px;
+//   font-size: 18px;
+//   cursor: pointer;
+//   transition: background-color 0.3s ease;
+// }
+
+// button:hover {
+//   background-color: #699cf5;
+// }

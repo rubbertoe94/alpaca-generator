@@ -1,19 +1,40 @@
-<div class="container">
-<h1>Alpaca Generator</h1>
+<div class="app-container">
 
-<img src='{{ "assets/backgrounds/" + alpaca.background + ".png" }}' alt="background image" class="background">
-<img src='{{  "assets/ears/" + alpaca.ears + ".png"  }}' alt="ears image" class="foreground">
-<img src='{{  "assets/eyes/" + alpaca.eyes + ".png"  }}' alt="eyes image" class="foreground" style="z-index: 2;">
-<img src='{{  "assets/hair/" + alpaca.hair + ".png"  }}' alt="hair image" class="foreground">
-<img src='{{  "assets/neck/" + alpaca.neck + ".png"  }}' alt="neck image" class="foreground">
-<img src='{{"assets/mouth/" + alpaca.mouth + ".png"  }}' alt="mouth image" class="foreground" style="z-index: 2;">
-<img src="assets/nose.png"   alt="nose image" class="foreground">
-
-<div class="radio-container">
-    <div class="radio" *ngFor="let property of properties | keyvalue">
-        <input type="radio" name="property_choice" id="{{property.key}}" value={{property.key}}
-        [checked]="(property.key == currentProperty)" (change)="changeProperty(property.key)">
-        <label for="{{property.key}}">{{property.key | titlecase}}</label>
+    <div class="img-container">
+            <img [src]=' "assets/backgrounds/" + alpaca.background + ".png" ' alt="background image" class="background">
+            <img [src]='  "assets/ears/" + alpaca.ears + ".png"  ' alt="ears image" class="foreground">
+            <img [src]='  "assets/eyes/" + alpaca.eyes + ".png"  ' alt="eyes image" class="foreground" style="z-index: 3;">
+            <img [src]='  "assets/hair/" + alpaca.hair + ".png"  ' alt="hair image" class="foreground" style="z-index: 2;">
+            <img [src]='  "assets/neck/" + alpaca.neck + ".png"  ' alt="neck image" class="foreground">
+            <img [src]='"assets/mouth/" + alpaca.mouth + ".png"  ' alt="mouth image" class="foreground" style="z-index: 2;">
+            <img [src]="'assets/leg/' + alpaca.leg + '.png'" alt="leg image" class="foreground">
+            <img [src]=" 'assets/nose.png'"   alt="nose image" class="foreground">
+            <img *ngIf="alpaca['accessories'] != 'default' " [src]="'assets/accessories/' + alpaca.accessories + '.png'" alt="accessories image" class="foreground" style="z-index: 3;">
+        <!-- <button>Hello</button> -->
     </div>
-</div>
+
+    <div class="selection-section">
+
+        <div class="radio-group1">
+            <h2>Select a Property</h2>
+            <div class="radio" *ngFor="let property of properties | keyvalue">
+                <input type="radio" name="property_choice" id="{{property.key}}" value={{property.key}}
+                [checked]="(property.key == currentProperty)" (change)="changeProperty(property.key)">
+                <label for="{{property.key}}">{{property.key | titlecase}}</label>
+            </div>
+        </div>
+
+        <div class="radio-group2">
+            <h2>Select a Style</h2>
+            <div class="radio" *ngFor="let style of properties[currentProperty]">
+                <input type="radio" name="style_choice" id="{{style.name}}" value="{{style.value}}"
+                [checked]="(style.value == alpaca[currentProperty])" (change)="changeStyle(style.value)">
+
+                <label [class]="(currentProperty == 'background') ? 'background-labels' : ''"
+                [style.background-image]="(currentProperty == 'background') ? 'url(assets/backgrounds/' + style.value + '.png)' : 'none'"
+                for="{{style.name}}"
+                >{{style.name}}</label>
+            </div>
+        </div>
+    </div>
 </div>
