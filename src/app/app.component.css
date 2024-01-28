@@ -1,20 +1,50 @@
-
-.app-container {
-  display: flex;
-  flex-direction: row; /* Align children side by side */
-  width: 100%;
-  height: 100vh; /* Adjust to fit the viewport height */
-  align-items: center; /* Center items vertically */
-  justify-content: center; /* Center items horizontally */
+body {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  background-color: #717f04; /* Set your desired background color */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Example of a nice font stack */
 }
 
 
+.app-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100vh;
+  padding-top: 40px;
+  position: relative; 
+}
+
+.header-title {
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  margin-top: 60px;
+  font-family: 'Comic Sans MS', cursive, sans-serif; 
+  font-size: 2.5rem; 
+  color: #23509c; 
+  text-shadow: 2px 2px 4px #c1d3ef; 
+  letter-spacing: 1px;
+  text-transform: uppercase; 
+}
+
+
+.img-container, .selection-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
   .img-container {
     flex: 1;
     position: relative;
     max-width: 50%;
-    height: 100%;
+    max-height: calc(50vh - 20px); 
   }
 
   .background, .foreground {
@@ -23,7 +53,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: max-content;
-    max-height: 100%; /* Adjust the max-height to fit within the container */
+    max-height: 100%; 
     z-index: 1; 
   }
 
@@ -46,11 +76,10 @@
   .selection-section {
     flex: 1;
     display: flex;
-    flex-direction:row; /* Organize content vertically */
+    flex-direction:row; 
     max-width: 50%;
-    /* Adjust layout and spacing */
-    gap: 20px; /* Adjust gap for better spacing */
-    padding: 20px; /* Add padding for better spacing */
+    gap: 20px; 
+    max-height: calc(50vh - 20px);
   }
 
   .radio-group1 {
