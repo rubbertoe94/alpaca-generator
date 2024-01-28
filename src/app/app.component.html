@@ -1,5 +1,5 @@
 <div class="app-container">
-    <canvas #myCanvas width="800" height="600"></canvas>
+    <canvas #myCanvas width="400" height="400" style="display: none;"></canvas>
 
 <h1 class="header-title">Alpaca Generator</h1>
     <div class="img-container">
@@ -12,7 +12,9 @@
             <img [src]="'assets/leg/' + alpaca.leg + '.png'" alt="leg image" class="foreground">
             <img [src]=" 'assets/nose.png'"   alt="nose image" class="foreground">
             <img *ngIf="alpaca['accessories'] != 'default' " [src]="'assets/accessories/' + alpaca.accessories + '.png'" alt="accessories image" class="foreground" style="z-index: 3;">
-        <!-- <button>Hello</button> -->
+        
+            <button (click)="randomize()">Randomize</button>
+            <button (click)="downloadImage()">Download Image</button>
     </div>
 
     <div class="selection-section">

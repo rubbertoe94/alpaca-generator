@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule, NgFor } from '@angular/common';
 
@@ -12,30 +12,116 @@ import { CommonModule, NgFor } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
 
-  
+  // @ViewChild('myCanvas', { static: false }) myCanvas!: ElementRef<HTMLCanvasElement>;
+
+  // ngAfterViewInit() {
+
+  //   const canvas: HTMLCanvasElement = this.myCanvas.nativeElement;
+  //   const context = canvas.getContext('2d');
+
+  //   if (canvas) {
+  //     const context = canvas.getContext('2d');
+
+  //     if (context) {
+  //       context.fillStyle = 'red';
+  //       context.fillRect(50, 50, 100, 100);
+  //     }
+  //   }
+  // }
   @ViewChild('myCanvas', { static: false }) myCanvas!: ElementRef<HTMLCanvasElement>;
 
-  ngAfterViewInit() {
-    // Access the canvas element here
+  constructor(private renderer: Renderer2) {}
+
+  downloadImage() {
     const canvas: HTMLCanvasElement = this.myCanvas.nativeElement;
     const context = canvas.getContext('2d');
-
+  
     if (canvas) {
       const context = canvas.getContext('2d');
+    if (context) {
 
-      if (context) {
-        // Use the canvas and its context to draw graphics, if needed
-        context.fillStyle = 'red';
-        context.fillRect(50, 50, 100, 100);
-      }
-    }
+    // Clear the canvas
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  
+    // Create an Image object for each Alpaca part
+    const background = new Image();
+    background.src = `assets/backgrounds/${this.alpaca.background}.png`;
+  
+    const ears = new Image();
+    ears.src = `assets/ears/${this.alpaca.ears}.png`;
+
+    const accessories = new Image();
+    accessories.src = `assets/accessories/${this.alpaca.accessories}.png`;
+
+    const eyes = new Image();
+    eyes.src = `assets/eyes/${this.alpaca.eyes}.png`;
+
+    const hair = new Image();
+    hair.src = `assets/hair/${this.alpaca.hair}.png`;
+
+    const leg = new Image();
+    leg.src = `assets/leg/${this.alpaca.leg}.png`;
+
+    const mouth = new Image();
+    mouth.src = `assets/mouth/${this.alpaca.mouth}.png`;
+
+    const neck = new Image();
+    neck.src = `assets/neck/${this.alpaca.neck}.png`;
+
+    const nose = new Image();
+    nose.src = `assets/nose.png`;
+  
+    // Once all images are loaded, draw them on the canvas
+    const allImagesLoaded = () => {
+      context.drawImage(background, 0, 0, canvas.width, canvas.height);
+      context.drawImage(ears, 0, 0, canvas.width, canvas.height);
+      context.drawImage(neck, 0, 0, canvas.width, canvas.height);
+      context.drawImage(nose, 0, 0, canvas.width, canvas.height);
+      context.drawImage(leg, 0, 0, canvas.width, canvas.height);
+      context.drawImage(mouth, 0, 0, canvas.width, canvas.height);
+      context.drawImage(hair, 0, 0, canvas.width, canvas.height);
+      context.drawImage(accessories, 0, 0, canvas.width, canvas.height);
+      context.drawImage(eyes, 0, 0, canvas.width, canvas.height);
+
+
+  
+      // Draw other Alpaca parts here...
+  
+      // Convert the canvas to a data URL (PNG format)
+      const dataURL = canvas.toDataURL('image/png');
+  
+      // Create a download link
+      const a = this.renderer.createElement('a');
+      a.href = dataURL;
+      a.download = 'alpaca_image.png';
+  
+      // Trigger a click event on the link to start the download
+      this.renderer.appendChild(document.body, a);
+      a.click();
+      this.renderer.removeChild(document.body, a);
+    };
+  
+    // Set up a callback to ensure all images are loaded
+    const imagesToLoad = [background, ears, eyes, hair, nose, accessories, leg, neck, mouth]; // Add other image variables here
+    let loadedCount = 0;
+    imagesToLoad.forEach((image) => {
+      image.onload = () => {
+        loadedCount++;
+        if (loadedCount === imagesToLoad.length) {
+          allImagesLoaded();
+        }
+      };
+    });
   }
+}
+  }
+  
 
   title = 'alpaca-generator';
 
-  constructor(){}
+
 
   properties: {[name: string]: any} = {
 
@@ -137,12 +223,11 @@ export class AppComponent implements AfterViewInit {
 
 changeProperty(choice: string) {
 this.currentProperty = choice;
-  console.log("currentProperty: ", this.currentProperty);
 }
 
 changeStyle(choice: string) {
   this.alpaca[this.currentProperty] = choice;
-  console.log("currentStyle: ", this.alpaca[this.currentProperty])
+  console.log(this.alpaca)
 }
 
 randomize() {
