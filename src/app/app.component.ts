@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule, NgFor } from '@angular/common';
+
+
 
 
 @Component({
@@ -10,7 +12,27 @@ import { CommonModule, NgFor } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
+
+  
+  @ViewChild('myCanvas', { static: false }) myCanvas!: ElementRef<HTMLCanvasElement>;
+
+  ngAfterViewInit() {
+    // Access the canvas element here
+    const canvas: HTMLCanvasElement = this.myCanvas.nativeElement;
+    const context = canvas.getContext('2d');
+
+    if (canvas) {
+      const context = canvas.getContext('2d');
+
+      if (context) {
+        // Use the canvas and its context to draw graphics, if needed
+        context.fillStyle = 'red';
+        context.fillRect(50, 50, 100, 100);
+      }
+    }
+  }
+
   title = 'alpaca-generator';
 
   constructor(){}
@@ -123,74 +145,21 @@ changeStyle(choice: string) {
   console.log("currentStyle: ", this.alpaca[this.currentProperty])
 }
 
-downloadImage() {
-
+randomize() {
+  for (let property in this.alpaca) {
+    let randomIndex = Math.floor(Math.random() * this.properties[property].length);
+    this.alpaca[property] = this.properties[property][randomIndex].value;
+  }
 }
 
+// save() {
+//   const alpacaElement = document.getElementById('alpaca');
+//   if (alpacaElement instanceof HTMLElement) {
+//     html2canvas(alpacaElement).then(canvas => {
+//       console.log(canvas);
+//       window.open(canvas.toDataURL('image/png'));
+//     });
+//   }
+// }
+
 }
-
-
-// .selection-section {
-//   flex: 1;
-//   padding-left: 20px; 
-// }
-
-// /* Selection control styles */
-// .radio-container {
-//   margin: 10px;
-//   text-align: center;
-// }
-
-// .radio h2 {
-//   font-size: 24px;
-//   margin-bottom: 10px;
-// }
-
-// .radio {
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: 10px;
-//   align-items: center;
-// }
-
-// input[type="radio"] {
-//   display: none;
-// }
-
-// label {
-//   display: block;
-//   cursor: pointer;
-//   font-size: 18px;
-//   font-weight: bold;
-//   border: 2px solid #c1d3ef;
-//   border-radius: 30px;
-//   color: #c1d3ef;
-//   padding: 10px 20px;
-//   text-align: center;
-//   transition: all 0.3s ease;
-// }
-
-// label:hover {
-//   border-color: #699cf5;
-//   color: #699cf5;
-// }
-
-
-// .download-section {
-//   margin-top: 20px;
-// }
-
-// button {
-//   background-color: #23509c;
-//   color: #fff;
-//   border: none;
-//   border-radius: 30px;
-//   padding: 10px 20px;
-//   font-size: 18px;
-//   cursor: pointer;
-//   transition: background-color 0.3s ease;
-// }
-
-// button:hover {
-//   background-color: #699cf5;
-// }

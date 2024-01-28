@@ -119,9 +119,9 @@ body {
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
-    border: 2px solid #c1d3ef;
+    border: 2px solid #285fb6;
     border-radius: 30px;
-    color: #c1d3ef;
+    color: #285fb6;
     padding: 10px 20px;
     text-align: center;
     transition: all 0.3s ease;
