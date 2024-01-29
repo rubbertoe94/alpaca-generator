@@ -14,22 +14,6 @@ import { CommonModule, NgFor } from '@angular/common';
 })
 export class AppComponent {
 
-  // @ViewChild('myCanvas', { static: false }) myCanvas!: ElementRef<HTMLCanvasElement>;
-
-  // ngAfterViewInit() {
-
-  //   const canvas: HTMLCanvasElement = this.myCanvas.nativeElement;
-  //   const context = canvas.getContext('2d');
-
-  //   if (canvas) {
-  //     const context = canvas.getContext('2d');
-
-  //     if (context) {
-  //       context.fillStyle = 'red';
-  //       context.fillRect(50, 50, 100, 100);
-  //     }
-  //   }
-  // }
   @ViewChild('myCanvas', { static: false }) myCanvas!: ElementRef<HTMLCanvasElement>;
 
   constructor(private renderer: Renderer2) {}
@@ -42,10 +26,10 @@ export class AppComponent {
       const context = canvas.getContext('2d');
     if (context) {
 
-    // Clear the canvas
+    
     context.clearRect(0, 0, canvas.width, canvas.height);
   
-    // Create an Image object for each Alpaca part
+    
     const background = new Image();
     background.src = `assets/backgrounds/${this.alpaca.background}.png`;
   
@@ -73,7 +57,7 @@ export class AppComponent {
     const nose = new Image();
     nose.src = `assets/nose.png`;
   
-    // Once all images are loaded, draw them on the canvas
+    
     const allImagesLoaded = () => {
       context.drawImage(background, 0, 0, canvas.width, canvas.height);
       context.drawImage(ears, 0, 0, canvas.width, canvas.height);
@@ -86,25 +70,22 @@ export class AppComponent {
       context.drawImage(eyes, 0, 0, canvas.width, canvas.height);
 
 
-  
-      // Draw other Alpaca parts here...
-  
-      // Convert the canvas to a data URL (PNG format)
+   
       const dataURL = canvas.toDataURL('image/png');
   
-      // Create a download link
+      
       const a = this.renderer.createElement('a');
       a.href = dataURL;
       a.download = 'alpaca_image.png';
   
-      // Trigger a click event on the link to start the download
+      
       this.renderer.appendChild(document.body, a);
       a.click();
       this.renderer.removeChild(document.body, a);
     };
   
-    // Set up a callback to ensure all images are loaded
-    const imagesToLoad = [background, ears, eyes, hair, nose, accessories, leg, neck, mouth]; // Add other image variables here
+    
+    const imagesToLoad = [background, ears, eyes, hair, nose, accessories, leg, neck, mouth]; 
     let loadedCount = 0;
     imagesToLoad.forEach((image) => {
       image.onload = () => {
@@ -236,15 +217,4 @@ randomize() {
     this.alpaca[property] = this.properties[property][randomIndex].value;
   }
 }
-
-// save() {
-//   const alpacaElement = document.getElementById('alpaca');
-//   if (alpacaElement instanceof HTMLElement) {
-//     html2canvas(alpacaElement).then(canvas => {
-//       console.log(canvas);
-//       window.open(canvas.toDataURL('image/png'));
-//     });
-//   }
-// }
-
 }
